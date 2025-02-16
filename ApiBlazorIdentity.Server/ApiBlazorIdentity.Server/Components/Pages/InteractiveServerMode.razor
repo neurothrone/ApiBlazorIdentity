@@ -2,11 +2,15 @@
 @rendermode InteractiveServer
 @using ApiBlazorIdentity.Shared.Models
 @using ApiBlazorIdentity.Shared.Services
+@using Microsoft.AspNetCore.Authorization
+@using ApiBlazorIdentity.Wasm.Components.Controls
+@attribute [Authorize]
 
 <h3>This component is rendered with <b>interactive server-side rendering</b></h3>
 
 <button class="btn btn-primary" @onclick="CallApiAsync">Call Remote API</button>
 <button class="btn btn-primary" @onclick="CallBlazorApiAsync">Call Blazor API</button>
+<AuthMessage/>
 
 @if (_skills == null)
 {
@@ -34,7 +38,7 @@ else
 }
 
 @code {
-
+    
     [Inject]
     private ISkillService SkillService { get; set; } = null!;
 
